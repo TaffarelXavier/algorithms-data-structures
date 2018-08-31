@@ -54,5 +54,38 @@ var search = function(nums, target) {
   return -1;
 };
 
+
+// Coderust version
+
+let binary_search_rotated = function(arr, target) {
+  let floor = 0;
+  let ceiling = arr.length - 1;
+
+  while (ceiling > floor + 1) {
+    let midPoint = floor + Math.floor((ceiling - floor) / 2);
+    if (arr[ceiling] === target) return ceiling;
+    if (arr[floor] === target) return floor;
+
+    if (arr[midPoint] > target) {
+      if (arr[ceiling] >= target) {
+        floor = midPoint;
+      } else if (arr[ceiling] <= target) {
+        ceiling = midPoint;
+      }
+
+    } else if (arr[midPoint] <= target) {
+      if (arr[ceiling] < target) {
+        ceiling = midPoint;
+      } else if (arr[ceiling] >= target) {
+        floor = midPoint;
+      }
+    } else {
+      return midPoint;
+    }
+
+  }
+
+  return -1;
+};
 // console.log(search([4,5,6,7,0,1,2], 3))
 console.log(search([1,3,5], 1))
